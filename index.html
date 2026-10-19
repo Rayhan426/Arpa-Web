@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arpa | Rayhan 💖</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Dancing Script for romantic text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="./images/Jasmine-Adorned Close-Up Portrait.png" type="image/x-icon">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Hind Siliguri', 'Inter', 'sans-serif'],
+                        cursive: ['Dancing Script', 'cursive'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-soft': 'bounce 2s infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f43f5e;
+            border-radius: 10px;
+        }
+        
+        /* Glassmorphism effects */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Floating particles canvas overlay */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Envelope interactive styling */
+        .envelope-wrapper {
+            perspective: 1000px;
+        }
+        .envelope {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out;
+        }
+        .flap {
+            transform-origin: top;
+            transition: transform 0.5s ease-in-out 0.2s, z-index 0.2s infinite;
+        }
+        .open .flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-rose-950 via-purple-950 to-slate-950 text-slate-100 min-h-screen font-sans selection:bg-rose-500 selection:text-white relative overflow-x-hidden pb-24">
+
+    <!-- Background Canvas for Floating Hearts & Stars -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- Header / Top Bar -->
+    <header class="relative z-20 flex justify-between items-center p-4 max-w-4xl mx-auto">
+        <div class="flex items-center space-x-2">
+            <span class="text-2xl animate-pulse">💖</span>
+            <span class="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-rose-300 to-pink-500">Happy Birthday Arpa</span>
+        </div>
+        
+        <!-- Music Synthesizer Toggle Button -->
+        <button id="music-toggle" onclick="toggleAudio()" class="glass-card px-4 py-2 rounded-full flex items-center space-x-2 border border-rose-500/30 text-xs font-semibold text-rose-200 hover:bg-rose-500/20 transition-all shadow-lg shadow-rose-950/50 active:scale-95">
+            <i id="music-icon" class="fa-solid fa-music text-rose-400"></i>
+            <span id="music-text">Music: OFF</span>
+        </button>
+    </header>
+
+    <!-- Main Content Dynamic Container -->
+    <main class="relative z-10 max-w-4xl mx-auto px-4 pt-2">
+
+        <!-- ================= HERO SECTION / LANDING ================= -->
+        <section id="hero-section" class="space-y-6 text-center py-6 transition-all duration-500">
+            <!-- Animated Crown / Birthday Badge -->
+            <div class="inline-block relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-rose-500 to-pink-600 rounded-full blur-md opacity-75 animate-pulse"></div>
+                <div class="relative w-28 h-28 mx-auto rounded-full p-1 bg-gradient-to-tr from-rose-400 to-purple-500">
+                    <img src="./images/arpa profile.jpeg" alt="Birthday Queen" class="w-full h-full object-cover rounded-full shadow-inner" id="hero-avatar">
+                </div>
+                <span class="absolute -bottom-2 right-2 bg-rose-600 text-white p-2 rounded-full shadow-lg text-xs">🎂</span>
+            </div>
+
+            <div class="space-y-2">
+                <h2 class="text-rose-400 text-sm font-semibold tracking-wider uppercase">আজকের শুভ দিনে 🎉</h2>
+                <h1 class="text-3xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-rose-200 via-pink-300 to-purple-200 leading-tight">
+                    Happy Birthday<br>My Lovely Wife💖
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base max-w-md mx-auto font-light">
+                    তোমার আজকের দিনটি ভালোবাসা এবং খুশিতে ভরে উঠুক...!
+                </p>
+            </div>
+
+            <!-- Dashboard Navigation Grid (Action Buttons) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                <!-- Button 1: Photos -->
+                <button onclick="switchTab('photos')" class="glass-card p-5 rounded-2xl flex flex-col items-center space-y-3 hover:border-rose-400/50 hover:bg-rose-500/10 transition-all duration-300 group shadow-xl hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-300 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-images text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-rose-100 group-hover:text-rose-300 transition-colors">আমাদের ছবিগুলো</h3>
+                        <p class="text-xs text-slate-400">Photo Gallery</p>
+                    </div>
+                    <span class="text-xs bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full border border-rose-500/30">Click Here</span>
+                </button>
+
+                <!-- Button 2: Moments -->
+                <button onclick="switchTab('moments')" class="glass-card p-5 rounded-2xl flex flex-col items-center space-y-3 hover:border-purple-400/50 hover:bg-purple-500/10 transition-all duration-300 group shadow-xl hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-300 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-face-smile-beam text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-purple-100 group-hover:text-purple-300 transition-colors">স্মরণীয় কিছু মুহূর্ত</h3>
+                        <p class="text-xs text-slate-400">Funny & Secret Cards</p>
+                    </div>
+                    <span class="text-xs bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full border border-purple-500/30">Click Here</span>
+                </button>
+
+                <!-- Button 3: Letter -->
+                <button onclick="switchTab('letter')" class="glass-card p-5 rounded-2xl flex flex-col items-center space-y-3 hover:border-pink-400/50 hover:bg-pink-500/10 transition-all duration-300 group shadow-xl hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-300 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-envelope-open-text text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-pink-100 group-hover:text-pink-300 transition-colors">আমার চিঠি</h3>
+                        <p class="text-xs text-slate-400">Letter for you</p>
+                    </div>
+                    <span class="text-xs bg-pink-500/20 text-pink-300 px-3 py-1 rounded-full border border-pink-500/30">Open Letter</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 1: PHOTO GALLERY ================= -->
+        <section id="photos-section" class="hidden space-y-6 py-4 animate-fade-in">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-rose-300">আমাদের মধুর ছবিগুলো 📸</h2>
+                    <p class="text-xs text-slate-400">Click the picture</p>
+                </div>
+                <button onclick="switchTab('hero')" class="text-xs glass-card px-3 py-1.5 rounded-lg text-slate-300 hover:text-white flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Go Back</span>
+                </button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4" id="gallery-container">
+                <!-- Dynamic or Static Gallery Cards -->
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: MEMORY TIMELINE / SECRETS ================= -->
+        <section id="moments-section" class="hidden space-y-6 py-4 animate-fade-in">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-purple-300">মজাদার ও স্মরণীয় মুহূর্ত 💭</h2>
+                    <p class="text-xs text-slate-400">Click to see secret</p>
+                </div>
+                <button onclick="switchTab('hero')" class="text-xs glass-card px-3 py-1.5 rounded-lg text-slate-300 hover:text-white flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Go Back</span>
+                </button>
+            </div>
+
+            <!-- Timeline Cards Grid -->
+            <div class="space-y-4" id="moments-container">
+                <!-- Memory items populated by JS -->
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: LOVE LETTER ================= -->
+        <section id="letter-section" class="hidden space-y-6 py-4 animate-fade-in text-center">
+            <div class="flex items-center justify-between">
+                <div class="text-left">
+                    <h2 class="text-2xl font-bold text-pink-300">ভালোবাসার খোলা চিঠি ✉️</h2>
+                    <p class="text-xs text-slate-400">Click the letter</p>
+                </div>
+                <button onclick="switchTab('hero')" class="text-xs glass-card px-3 py-1.5 rounded-lg text-slate-300 hover:text-white flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Go Back</span>
+                </button>
+            </div>
+
+            <!-- Interactive Envelope -->
+            <div class="py-6 flex flex-col items-center justify-center">
+                <div id="envelope-card" onclick="openLetter()" class="w-72 sm:w-96 bg-gradient-to-r from-rose-700 to-pink-800 rounded-xl p-6 shadow-2xl border border-rose-400/40 cursor-pointer transform hover:scale-105 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-white/10 rounded-full blur-lg"></div>
+                    
+                    <div class="space-y-4 text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-full mx-auto flex items-center justify-center text-3xl shadow-inner group-hover:animate-bounce">
+                            💌
+                        </div>
+                        <h3 class="text-lg font-bold text-white">To My Sweetest Wife ❤️</h3>
+                        <p class="text-xs text-rose-200">তোমার জন্য মন থেকে লেখা কিছু কথা...</p>
+                        <div class="inline-block bg-white text-rose-800 font-bold text-xs px-4 py-2 rounded-full shadow-lg">
+                            Open The Letter ✨
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Open Paper Modal / Letter Container -->
+                <div id="letter-paper" class="hidden w-full max-w-xl glass-card p-6 sm:p-8 rounded-2xl text-left border border-pink-400/30 mt-6 relative shadow-2xl">
+                    <div class="flex justify-between items-center border-b border-rose-500/30 pb-3 mb-4">
+                        <span class="font-cursive text-2xl text-rose-300">My Love,</span>
+                        <span class="text-xs text-slate-400" id="letter-date">Today</span>
+                    </div>
+
+                    <!-- Typewriter Target -->
+                    <div id="typewriter-text" class="text-slate-200 text-sm sm:text-base leading-relaxed space-y-3 font-normal min-h-[180px]">
+                        <!-- Typed text appears here -->
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-rose-500/20 text-right">
+                        <p class="font-cursive text-2xl text-rose-300">Forever Yours,</p>
+                        <p class="font-semibold text-rose-400 text-sm">তোমার জামাই (Rayhan) 💕</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (Mobile Friendly) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-30 glass-nav px-6 py-2">
+        <div class="max-w-md mx-auto flex justify-around items-center">
+            <button onclick="switchTab('hero')" id="nav-hero" class="flex flex-col items-center space-y-1 text-rose-400 font-semibold transition-colors">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-[10px]">Home</span>
+            </button>
+            <button onclick="switchTab('photos')" id="nav-photos" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-rose-300 transition-colors">
+                <i class="fa-solid fa-images text-lg"></i>
+                <span class="text-[10px]">Pictures</span>
+            </button>
+            <button onclick="switchTab('moments')" id="nav-moments" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-rose-300 transition-colors">
+                <i class="fa-solid fa-heart text-lg"></i>
+                <span class="text-[10px]">Memories</span>
+            </button>
+            <button onclick="switchTab('letter')" id="nav-letter" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-rose-300 transition-colors">
+                <i class="fa-solid fa-envelope text-lg"></i>
+                <span class="text-[10px]">Letter</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Photo Modal View -->
+    <div id="photo-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="relative max-w-lg w-full glass-card rounded-2xl overflow-hidden p-3 border border-rose-500/30 animate-scale-up">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-rose-600 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="modal-img" src="" alt="Memory" class="w-full h-72 object-cover rounded-xl">
+            <div class="p-4 space-y-2">
+                <h3 id="modal-title" class="text-lg font-bold text-rose-300"></h3>
+                <p id="modal-desc" class="text-sm text-slate-300"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Sample Custom Data (Stored locally or loaded dynamically)
+        const samplePhotos = [
+            {
+                url: 'https://imgur.com/z56NgmZ.jpg',
+                title: 'আমাদের প্রথম ঘোরার দিন 🌸',
+                caption: 'সেই যে মুক্তিযোদ্ধা পার্কটিতে আমরা একসাথে বসে আমাদের দ্বিতীয় বার দেখা হয়েছিল, দিন টা ‍সত্যি অনেক স্মৃতিময় আমার কাছে। প্রথম দিনের ছবি আমার কাছে নেই তাই এই দিনটা কেই আমি প্রথম দিন মনে করি, সেদিনই প্রথম আমরা একসাথে হাত ধরে হেঁটেছি - হুট ছাড়া রিক্সায় ঘুরেছি স্নিগ্ধ অসাধারণ।'
+            },
+            {
+                url: 'https://imgur.com/sw8eslg.jpg',
+                title: 'হাতে হাত রেখে হাঁটা 🤝',
+                caption: 'কী অদ্ভুত ছিল সেই অনুভূতি, একই পথে হাঁটছিলাম দুজন, অথচ মনে হচ্ছিল আমি যেন জীবনের সবচেয়ে সুন্দর একটা পথে হাঁটছি।'
+            },
+            {
+                url: '',
+                title: 'পাগলামির মুহূর্ত 🤪',
+                caption: ''
+            },
+            {
+                url: '',
+                title: 'তোমার মিষ্টি হাসি 😊',
+                caption: ''
+            },
+            {
+                url: '',
+                title: 'আড্ডা ☕',
+                caption: ''
+            },
+            {
+                url: '',
+                title: ' 👑',
+                caption: 'আমার রানী তুমি, চিরকাল এভাবেই আমার হৃদয়ে থাকবে।'
+            }
+        ];
+
+        const sampleMoments = [
+            {
+                date: 'মজাদার মুহূর্ত #১',
+                title: 'সেই প্রথম রান্নার ব্যর্থ চেষ্টা! 🍳',
+                preview: 'যেদিন আমরা দুজন মিলে রান্না করতে গিয়ে প্রায় পুরো কিচেন ধোঁয়াচ্ছন্ন করে ফেলেছিলাম...',
+                secret: 'কিন্তু তাও তোমার বানানো খাবারটি আমার খাওয়া জীবনের সবচাইতে সুস্বাদু খাবার ছিল!'
+            },
+            {
+                date: 'স্মরণীয় মুহূর্ত #২',
+                title: 'বৃষ্টিতে ভিজা বিকেল 🌧️',
+                preview: 'হুট করে আসা বৃষ্টিতে আমাদের ভিজা আর এক ছাতার নিচে আশ্রয় নেওয়া...',
+                secret: 'সেদিন বুঝেছিলাম, তোমার সাথে ছোট ছোট মুহূর্তগুলোও কতটা অদ্ভুত সুন্দর হতে পারে।'
+            },
+            {
+                date: 'মিষ্টি ঝগড়া #৩',
+                title: 'কোথায় খাওয়া হবে তাই নিয়ে ঝগড়া! 🍕',
+                preview: 'ঘন্টার পর ঘন্টা আলোচনা করেও আমরা ঠিক করতে পারি না কোন রেস্টুরেন্টে যাবো...',
+                secret: 'শেষ পর্যন্ত কিন্তু ফুচকা খেয়েই আমরা সবচেয়ে বেশি খুশি হই!'
+            }
+        ];
+
+        const loveLetterContent = `আমার প্রিয়তমা,
+        
+শুভ জন্মদিন! আজকের এই বিশেষ দিনে তোমাকে অনেক অনেক ভালোবাসা আর শুভকামনা জানাই। 
+
+তুমি আমার জীবনে আসার পর থেকে সবকিছু যেন এক নতুন আলোয় রূপ নিয়েছে। তোমার একটুখানি হাসি আমার পুরো দিনটাকে সুন্দর করে তোলার জন্য যথেষ্ট। 
+
+ঈশ্বর তোমাকে সবসময় হাসিখুশি রাখুক, তোমার সব স্বপ্ন পূরণ করুক। আমি চিরকাল তোমার পাশে থাকতে চাই, তোমার হাতে হাত রেখে জীবনের পথ চলতে চাই।
+
+আমার জীবনের সেরা উপহার হওয়ার জন্য তোমাকে ধন্যবাদ। খুব ভালোবাসি তোমাকে! ❤️`;
+
+        // Local Storage Initialization
+        function initData() {
+            if(!localStorage.getItem('gf_photos')) {
+                localStorage.setItem('gf_photos', JSON.stringify(samplePhotos));
+            }
+            if(!localStorage.getItem('gf_moments')) {
+                localStorage.setItem('gf_moments', JSON.stringify(sampleMoments));
+            }
+            if(!localStorage.getItem('gf_letter')) {
+                localStorage.setItem('gf_letter', loveLetterContent);
+            }
+        }
+
+        // Render Photo Gallery
+        function renderPhotos() {
+            const photos = JSON.parse(localStorage.getItem('gf_photos'));
+            const container = document.getElementById('gallery-container');
+            container.innerHTML = photos.map((photo, index) => `
+                <div onclick="openModal('${photo.url}', '${photo.title}', '${photo.caption}')" class="glass-card rounded-xl overflow-hidden cursor-pointer group hover:border-rose-400/50 transition-all duration-300">
+                    <div class="h-36 sm:h-48 overflow-hidden relative">
+                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                            <span class="text-xs text-rose-200 font-semibold">ক্লিক করে বড় দেখো 🔍</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h4 class="font-semibold text-xs sm:text-sm text-rose-200 truncate">${photo.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Memory Cards
+        function renderMoments() {
+            const moments = JSON.parse(localStorage.getItem('gf_moments'));
+            const container = document.getElementById('moments-container');
+            container.innerHTML = moments.map((moment, index) => `
+                <div class="glass-card p-4 rounded-xl space-y-2 hover:border-purple-400/40 transition-all">
+                    <div class="flex justify-between items-center text-xs text-purple-300 font-semibold">
+                        <span>${moment.date}</span>
+                        <i class="fa-solid fa-sparkles"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-slate-100">${moment.title}</h3>
+                    <p class="text-xs sm:text-sm text-slate-300">${moment.preview}</p>
+                    
+                    <div id="secret-${index}" class="hidden pt-2 border-t border-purple-500/20 text-xs sm:text-sm text-pink-300 italic">
+                        " ${moment.secret} "
+                    </div>
+                    
+                    <button onclick="toggleSecret(${index})" class="text-xs text-purple-400 font-bold hover:underline pt-1 flex items-center space-x-1">
+                        <span id="btn-text-${index}">গোপন কথাটি দেখতে চাপ দাও</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Toggle Secret Text
+        function toggleSecret(index) {
+            const secretElem = document.getElementById(`secret-${index}`);
+            const btnText = document.getElementById(`btn-text-${index}`);
+            if(secretElem.classList.contains('hidden')) {
+                secretElem.classList.remove('hidden');
+                btnText.innerText = 'লুকিয়ে ফেলো';
+            } else {
+                secretElem.classList.add('hidden');
+                btnText.innerText = 'Click To Open Secret';
+            }
+        }
+
+        // Switch View Tabs
+        function switchTab(tabName) {
+            const tabs = ['hero', 'photos', 'moments', 'letter'];
+            tabs.forEach(tab => {
+                const sec = document.getElementById(`${tab}-section`);
+                const nav = document.getElementById(`nav-${tab}`);
+                if(tab === tabName) {
+                    sec.classList.remove('hidden');
+                    if(nav) {
+                        nav.classList.add('text-rose-400');
+                        nav.classList.remove('text-slate-400');
+                    }
+                } else {
+                    sec.classList.add('hidden');
+                    if(nav) {
+                        nav.classList.remove('text-rose-400');
+                        nav.classList.add('text-slate-400');
+                    }
+                }
+            });
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Modal Handler
+        function openModal(url, title, desc) {
+            document.getElementById('modal-img').src = url;
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('photo-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('photo-modal').classList.add('hidden');
+        }
+
+        // Letter Envelope and Typewriter Animation
+        let isTyped = false;
+        function openLetter() {
+            document.getElementById('envelope-card').classList.add('hidden');
+            const paper = document.getElementById('letter-paper');
+            paper.classList.remove('hidden');
+            
+            document.getElementById('letter-date').innerText = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            if (!isTyped) {
+                isTyped = true;
+                const text = localStorage.getItem('gf_letter') || loveLetterContent;
+                let i = 0;
+                const target = document.getElementById('typewriter-text');
+                target.innerHTML = '';
+                
+                function typeNextChar() {
+                    if (i < text.length) {
+                        const char = text.charAt(i);
+                        if(char === '\n') {
+                            target.innerHTML += '<br>';
+                        } else {
+                            target.innerHTML += char;
+                        }
+                        i++;
+                        setTimeout(typeNextChar, 35);
+                    }
+                }
+                typeNextChar();
+            }
+        }
+
+        // Web Audio API Synthesizer for Relaxing Background Melody (No external links needed!)
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyInterval = null;
+
+        function playRomanticMelody() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23]; // C4, E4, G4, C5, A4, F4
+            let step = 0;
+
+            melodyInterval = setInterval(() => {
+                if (!isPlaying) return;
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
+
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1.2);
+
+                step++;
+            }, 600);
+        }
+
+        function toggleAudio() {
+            const icon = document.getElementById('music-icon');
+            const text = document.getElementById('music-text');
+
+            if (!isPlaying) {
+                isPlaying = true;
+                playRomanticMelody();
+                icon.className = "fa-solid fa-volume-high text-rose-400 animate-pulse";
+                text.innerText = "Music: ON 🎶";
+            } else {
+                isPlaying = false;
+                if(melodyInterval) clearInterval(melodyInterval);
+                icon.className = "fa-solid fa-music text-rose-400";
+                text.innerText = "Music: OFF";
+            }
+        }
+
+        // Background Animation (Hearts and Stars Canvas)
+        function initCanvas() {
+            const canvas = document.getElementById('canvas-bg');
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = Array.from({ length: 30 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * 12 + 8,
+                speedY: Math.random() * 0.8 + 0.3,
+                opacity: Math.random() * 0.6 + 0.2,
+                type: Math.random() > 0.4 ? 'heart' : 'star'
+            }));
+
+            function drawHeart(x, y, size, color) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.fillStyle = color;
+                const topCurveHeight = size * 0.3;
+                ctx.moveTo(x, y + topCurveHeight);
+                ctx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + topCurveHeight);
+                ctx.bezierCurveTo(x - size / 2, y + (size + topCurveHeight) / 2, x, y + size, x, y + size);
+                ctx.bezierCurveTo(x, y + size, x + size / 2, y + (size + topCurveHeight) / 2, x + size / 2, y + topCurveHeight);
+                ctx.bezierCurveTo(x + size / 2, y, x, y, x, y + topCurveHeight);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.y -= p.speedY;
+                    if (p.y < -20) {
+                        p.y = height + 20;
+                        p.x = Math.random() * width;
+                    }
+
+                    if (p.type === 'heart') {
+                        drawHeart(p.x, p.y, p.size, `rgba(244, 63, 94, ${p.opacity})`);
+                    } else {
+                        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size / 4, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        // Initialize App on Page Load
+        window.onload = function() {
+            initData();
+            renderPhotos();
+            renderMoments();
+            initCanvas();
+        };
+    </script>
+</body>
+</html>
