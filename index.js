@@ -12,9 +12,9 @@
                 caption: 'কী অদ্ভুত ছিল সেই অনুভূতি, একই পথে হাঁটছিলাম দুজন, অথচ মনে হচ্ছিল আমি যেন জীবনের সবচেয়ে সুন্দর একটা পথে হাঁটছি।'
             },
             {
-                url: '',
-                title: 'পাগলামির মুহূর্ত 🤪',
-                caption: ''
+                url: 'https://imgur.com/cilYLdc.jpg',
+                title: 'পাগলামির মুহূর্ত 🤣',
+                caption: 'আমার এই পাগলামি বা এই ইচ্ছাটা আমার সবচাইতে আনন্দ হতো যে তোমাকে ফুলসহ আস্ত একটা গাছ দিয়ে দি। আর কিছুদিন থাকলে তোমার বাসা গাছ দিয়ে ভরে যেত হয়তো 🤣'
             },
             {
                 url: '',
@@ -22,14 +22,14 @@
                 caption: ''
             },
             {
-                url: '',
+                url: 'https://imgur.com/QzFwMHr.jpg',
                 title: 'আড্ডা ☕',
-                caption: ''
+                caption: 'চারপাশ যখন নিস্তব্ধ, শহরটা যখন ঘুমিয়ে, তখন শুধু আমাদের গল্প, হাসি আর একসাথে কাটানো সেই ছোট্ট সময়টুকুই যেন পুরো পৃথিবী হয়ে ছিল। সেই রাতের উষ্ণতা হয়তো শীতের চেয়েও বেশি সুন্দর ছিল। ❤️'
             },
             {
-                url: '',
-                title: ' 👑',
-                caption: 'আমার রানী তুমি, চিরকাল এভাবেই আমার হৃদয়ে থাকবে।'
+                url: 'https://imgur.com/MlkwIVv.jpg',
+                title: 'আমার সুন্দরী টা 🫶',
+                caption: 'আমার রানী তুমি 👑 চিরকাল এভাবেই আমার হৃদয়ে থাকবে।'
             }
         ];
 
@@ -83,10 +83,10 @@
             const container = document.getElementById('gallery-container');
             container.innerHTML = photos.map((photo, index) => `
                 <div onclick="openModal('${photo.url}', '${photo.title}', '${photo.caption}')" class="glass-card rounded-xl overflow-hidden cursor-pointer group hover:border-rose-400/50 transition-all duration-300">
-                    <div class="h-36 sm:h-48 overflow-hidden relative">
+                    <div class="h-64 sm:h-80 overflow-hidden relative">
                         <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                            <span class="text-xs text-rose-200 font-semibold">ক্লিক করে বড় দেখো 🔍</span>
+                            <span class="text-xs text-rose-200 font-semibold">Click For Details 🔍</span>
                         </div>
                     </div>
                     <div class="p-3">
@@ -114,7 +114,7 @@
                     </div>
                     
                     <button onclick="toggleSecret(${index})" class="text-xs text-purple-400 font-bold hover:underline pt-1 flex items-center space-x-1">
-                        <span id="btn-text-${index}">গোপন কথাটি দেখতে চাপ দাও</span>
+                        <span id="btn-text-${index}">Click For Secret</span>
                         <i class="fa-solid fa-chevron-down text-[10px]"></i>
                     </button>
                 </div>
@@ -127,7 +127,7 @@
             const btnText = document.getElementById(`btn-text-${index}`);
             if(secretElem.classList.contains('hidden')) {
                 secretElem.classList.remove('hidden');
-                btnText.innerText = 'লুকিয়ে ফেলো';
+                btnText.innerText = 'Hide';
             } else {
                 secretElem.classList.add('hidden');
                 btnText.innerText = 'Click To Open Secret';
