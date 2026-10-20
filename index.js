@@ -35,22 +35,34 @@
 
         const sampleMoments = [
             {
-                date: 'মজাদার মুহূর্ত #১',
-                title: 'সেই প্রথম রান্নার ব্যর্থ চেষ্টা! 🍳',
-                preview: 'যেদিন আমরা দুজন মিলে রান্না করতে গিয়ে প্রায় পুরো কিচেন ধোঁয়াচ্ছন্ন করে ফেলেছিলাম...',
-                secret: 'কিন্তু তাও তোমার বানানো খাবারটি আমার খাওয়া জীবনের সবচাইতে সুস্বাদু খাবার ছিল!'
+                 date: '#১',
+                title: '',
+                preview: '',
+                secret: ''
             },
             {
-                date: 'স্মরণীয় মুহূর্ত #২',
-                title: 'বৃষ্টিতে ভিজা বিকেল 🌧️',
-                preview: 'হুট করে আসা বৃষ্টিতে আমাদের ভিজা আর এক ছাতার নিচে আশ্রয় নেওয়া...',
-                secret: 'সেদিন বুঝেছিলাম, তোমার সাথে ছোট ছোট মুহূর্তগুলোও কতটা অদ্ভুত সুন্দর হতে পারে।'
+                date: '#২',
+                title: '',
+                preview: '',
+                secret: ''
             },
             {
-                date: 'মিষ্টি ঝগড়া #৩',
-                title: 'কোথায় খাওয়া হবে তাই নিয়ে ঝগড়া! 🍕',
-                preview: 'ঘন্টার পর ঘন্টা আলোচনা করেও আমরা ঠিক করতে পারি না কোন রেস্টুরেন্টে যাবো...',
-                secret: 'শেষ পর্যন্ত কিন্তু ফুচকা খেয়েই আমরা সবচেয়ে বেশি খুশি হই!'
+                date: '#৩',
+                title: '',
+                preview: '',
+                secret: ''
+            },
+            {
+                date: '#৪',
+                title: '',
+                preview: '',
+                secret: ''
+            },
+            {
+                date: '#৫',
+                title: '',
+                preview: '',
+                secret: ''
             }
         ];
 
@@ -58,9 +70,8 @@
         
 শুভ জন্মদিন! আজকের এই বিশেষ দিনে তোমাকে অনেক অনেক ভালোবাসা আর শুভকামনা জানাই। 
 
-তুমি আমার জীবনে আসার পর থেকে সবকিছু যেন এক নতুন আলোয় রূপ নিয়েছে। তোমার একটুখানি হাসি আমার পুরো দিনটাকে সুন্দর করে তোলার জন্য যথেষ্ট। 
 
-ঈশ্বর তোমাকে সবসময় হাসিখুশি রাখুক, তোমার সব স্বপ্ন পূরণ করুক। আমি চিরকাল তোমার পাশে থাকতে চাই, তোমার হাতে হাত রেখে জীবনের পথ চলতে চাই।
+আল্লাহ্ তোমাকে সবসময় হাসিখুশি রাখুক, তোমার সব স্বপ্ন পূরণ করুক। আমি চিরকাল তোমার পাশে থাকতে চাই, তোমার হাতে হাত রেখে জীবনের পথ চলতে চাই।
 
 আমার জীবনের সেরা উপহার হওয়ার জন্য তোমাকে ধন্যবাদ। খুব ভালোবাসি তোমাকে! ❤️`;
 
@@ -176,7 +187,7 @@
             const paper = document.getElementById('letter-paper');
             paper.classList.remove('hidden');
             
-            document.getElementById('letter-date').innerText = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+            
 
             if (!isTyped) {
                 isTyped = true;
@@ -201,57 +212,35 @@
             }
         }
 
-        // Web Audio API Synthesizer for Relaxing Background Melody (No external links needed!)
-        let audioCtx = null;
-        let isPlaying = false;
-        let melodyInterval = null;
+        // audio file added 
+      let isPlaying = false;
+const bgAudio = document.getElementById('bgAudio');
 
-        function playRomanticMelody() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
+function toggleAudio() {
+    const icon = document.getElementById('music-icon');
+    const text = document.getElementById('music-text');
 
-            const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23]; // C4, E4, G4, C5, A4, F4
-            let step = 0;
+    if (!bgAudio) {
+        alert("Audio element khuje paoa jacche na!");
+        return;
+    }
 
-            melodyInterval = setInterval(() => {
-                if (!isPlaying) return;
-
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
-
-                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + 1.2);
-
-                step++;
-            }, 600);
-        }
-
-        function toggleAudio() {
-            const icon = document.getElementById('music-icon');
-            const text = document.getElementById('music-text');
-
-            if (!isPlaying) {
-                isPlaying = true;
-                playRomanticMelody();
-                icon.className = "fa-solid fa-volume-high text-rose-400 animate-pulse";
-                text.innerText = "Music: ON 🎶";
-            } else {
-                isPlaying = false;
-                if(melodyInterval) clearInterval(melodyInterval);
-                icon.className = "fa-solid fa-music text-rose-400";
-                text.innerText = "Music: OFF";
-            }
-        }
+    if (!isPlaying) {
+        bgAudio.play().then(() => {
+            isPlaying = true;
+            if (icon) icon.className = "fa-solid fa-volume-high text-rose-400 animate-pulse";
+            if (text) text.innerText = "Music: ON 🎶";
+        }).catch(error => {
+            console.log("Autoplay error:", error);
+            alert("Gan play kora jacche na! Audio file path ba link thik ache kina check korun.");
+        });
+    } else {
+        bgAudio.pause();
+        isPlaying = false;
+        if (icon) icon.className = "fa-solid fa-music text-rose-400";
+        if (text) text.innerText = "Music: OFF";
+    }
+}
 
         // Background Animation (Hearts and Stars Canvas)
         function initCanvas() {
