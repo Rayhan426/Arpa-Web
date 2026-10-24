@@ -116,7 +116,7 @@
                     <h3 class="font-bold text-base text-slate-100">${moment.title}</h3>
                     <p class="text-xs sm:text-sm text-slate-300">${moment.preview}</p>
                     
-                    <div id="secret-${index}" class="hidden pt-2 border-t border-purple-500/20 text-xs sm:text-sm text-pink-300 italic">
+                    <div id="secret-${index}" class="hidden font-medium leading-relaxed text-justify text-slate-200 pt-2 border-t border-purple-500/20 text-sm">
                         " ${moment.secret} "
                     </div>
                     
